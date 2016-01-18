@@ -48,19 +48,23 @@ var NavBarContent = React.createClass({
     this.props.goForward(route);
   },
 
+  goReplace: function(route) {
+    this.props.goReplace(route);
+  },
+
   customAction: function(opts) {
     this.props.customAction(opts);
   },
 
   render() {
-    var transitionStyle = { 
+    var transitionStyle = {
       opacity: this.getTweeningValue('opacity'),
     };
 
     var leftCorner;
     var rightCorner;
     var titleComponent;
-    
+
 
     /**
      * Set leftCorner
@@ -104,7 +108,7 @@ var NavBarContent = React.createClass({
 
     if (this.props.route.titleComponent) {
       var TitleComponent = this.props.route.titleComponent;
-      titleContent = <TitleComponent />;
+      titleContent = <TitleComponent toRoute={this.goForward} toBack={this.goBack} toReplace={this.goReplace} customAction={this.customAction}/>;
     } else {
       titleContent = (
         <Text style={[styles.navbarText, this.props.titleStyle]}>

@@ -35,6 +35,10 @@ var NavBarContainer = React.createClass({
     this.props.toRoute(route, this.props.navigator);
   },
 
+  goReplace: function(route){
+      this.props.toReplace(route,this.props.navigator);
+  },
+
   customAction: function(opts) {
     this.props.customAction(opts);
   },
@@ -43,20 +47,22 @@ var NavBarContainer = React.createClass({
   render: function() {
     return (
       <View style={[styles.navbarContainer, this.props.style]}>
-        <NavBarContent 
-          route={this.state.previousRoute} 
+        <NavBarContent
+          route={this.state.previousRoute}
           backButtonComponent={this.props.backButtonComponent}
           rightCorner={this.props.rightCorner}
           titleStyle={this.props.titleStyle}
-          willDisappear="true" 
+          willDisappear="true"
         />
-        <NavBarContent 
-          route={this.props.currentRoute} 
+        <NavBarContent
+          navigator={this.props.navigator}
+          route={this.props.currentRoute}
           backButtonComponent={this.props.backButtonComponent}
           rightCorner={this.props.rightCorner}
           titleStyle={this.props.titleStyle}
           goBack={this.goBack}
           goForward={this.goForward}
+          goReplace={this.goReplace}
           customAction={this.customAction}
         />
       </View>
@@ -72,7 +78,8 @@ var styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: 64,
-    backgroundColor: '#5589B7'
+    backgroundColor: '#5589B7',
+    opacity:0.8
   }
 });
 
